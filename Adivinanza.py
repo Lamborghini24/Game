@@ -32,9 +32,13 @@ if Dificultad == 1:
         else:
             word_displayed = word_displayed + "_"
 elif Dificultad == 2:
-    guessed_letters.append(secret_word[0])
-    guessed_letters.append(secret_word[-1])
-    word_displayed = secret_word[0] + ("_" * len(secret_word)) + secret_word[-1]
+    inicio = (secret_word[0])
+    fin = (secret_word[-1])
+    aux = ""
+    for i in range(1, len(secret_word)-1):
+        aux=aux+secret_word[i]
+    secret_word=aux
+    word_displayed = inicio + ("_" * len(secret_word) ) + fin
 
 elif Dificultad == 3:
     word_displayed = "_" * len(secret_word)
@@ -68,14 +72,23 @@ while fallos < max_attempts:
         else:
             letters.append("_")
     word_displayed = "".join(letters)
-    print(f"Palabra: {word_displayed}")
+    if Dificultad != 2:
+        print(f"Palabra: {word_displayed}")
+    else:
+        print(f"Palabra: {inicio+word_displayed+fin}")
         # Verificar si se ha adivinado la palabra completa
     if word_displayed == secret_word:
-        print(f"¡Felicidades! Has adivinado la palabra secreta: {secret_word}")
+        if Dificultad!=2:
+            print(f"¡Felicidades! Has adivinado la palabra secreta: {secret_word}")
+        else:
+            print(f"¡Felicidades! Has adivinado la palabra secreta: {inicio+secret_word+fin}")
         break
 else:
     print(f"¡Oh no! Has agotado tus {max_attempts} intentos.")  
-    print(f"La palabra secreta era: {secret_word}")
+    if Dificultad!=2:
+        print(f"La palabra secreta era: {secret_word}")
+    else:
+        print(f"La palabra secreta era: {inicio+secret_word+fin}")
 
 ### Made in argentina
 
